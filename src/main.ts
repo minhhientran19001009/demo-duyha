@@ -833,9 +833,10 @@ class PortalApp {
     let newTotalPeople = 0;
     let newTotalArea = 0;
     const newRowsHtml = newList.map((n, idx) => {
+      const area = n.area_ha || oldList.filter(o => o.group_code === n.group_code).reduce((sum, o) => sum + (o.area_ha || 0), 0);
       newTotalHouseholds += n.households || 0;
       newTotalPeople += n.people || 0;
-      newTotalArea += n.area_ha || 0;
+      newTotalArea += area;
       const gStyle = groupStyles[n.group_code] || { label: 'TDP Mới', badgeClass: 'bg-slate-100 text-slate-700', borderClass: 'border-l-4 border-slate-400', highlightClass: '' };
       return `
         <tr data-group-code="${n.group_code}" class="tdp-merger-row transition-all duration-300 cursor-pointer hover:bg-amber-50 dark:hover:bg-slate-800">
@@ -850,7 +851,7 @@ class PortalApp {
           </td>
           <td class="py-2.5 px-2 text-right font-bold text-slate-800 dark:text-slate-200">${n.households.toLocaleString('vi-VN')}</td>
           <td class="py-2.5 px-2 text-right font-bold text-slate-800 dark:text-slate-200">${n.people.toLocaleString('vi-VN')}</td>
-          <td class="py-2.5 px-2 text-right font-extrabold text-slate-900 dark:text-slate-100">${n.area_ha ? n.area_ha.toFixed(2).replace('.', ',') : '--'}</td>
+          <td class="py-2.5 px-2 text-right font-extrabold text-slate-900 dark:text-slate-100">${area ? area.toFixed(2).replace('.', ',') : '--'}</td>
         </tr>
       `;
     }).join('');
