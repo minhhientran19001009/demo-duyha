@@ -8,6 +8,7 @@
         "leader_phone": null,
         "households": 796,
         "people": 2806,
+        "area_ha": 155.50,
         "status": "active"
     },
     {
@@ -19,6 +20,7 @@
         "leader_phone": null,
         "households": 712,
         "people": 2348,
+        "area_ha": 34.20,
         "status": "active"
     },
     {
@@ -30,6 +32,7 @@
         "leader_phone": null,
         "households": 663,
         "people": 2404,
+        "area_ha": 131.40,
         "status": "active"
     },
     {
@@ -41,6 +44,7 @@
         "leader_phone": null,
         "households": 634,
         "people": 2168,
+        "area_ha": 164.60,
         "status": "active"
     },
     {
@@ -52,6 +56,7 @@
         "leader_phone": null,
         "households": 561,
         "people": 2046,
+        "area_ha": 187.80,
         "status": "active"
     },
     {
@@ -63,6 +68,7 @@
         "leader_phone": null,
         "households": 201,
         "people": 669,
+        "area_ha": 20.30,
         "status": "active"
     },
     {
@@ -74,6 +80,7 @@
         "leader_phone": null,
         "households": 326,
         "people": 1174,
+        "area_ha": 46.80,
         "status": "active"
     },
     {
@@ -85,6 +92,7 @@
         "leader_phone": null,
         "households": 234,
         "people": 899,
+        "area_ha": 72.50,
         "status": "active"
     },
     {
@@ -96,6 +104,7 @@
         "leader_phone": null,
         "households": 327,
         "people": 1158,
+        "area_ha": 130.50,
         "status": "active"
     },
     {
@@ -107,6 +116,7 @@
         "leader_phone": null,
         "households": 403,
         "people": 1355,
+        "area_ha": 288.10,
         "status": "active"
     },
     {
@@ -118,6 +128,7 @@
         "leader_phone": null,
         "households": 379,
         "people": 1284,
+        "area_ha": 84.60,
         "status": "active"
     },
     {
@@ -129,6 +140,7 @@
         "leader_phone": null,
         "households": 346,
         "people": 1243,
+        "area_ha": 82.50,
         "status": "active"
     },
     {
@@ -140,6 +152,7 @@
         "leader_phone": null,
         "households": 318,
         "people": 1096,
+        "area_ha": 62.90,
         "status": "active"
     },
     {
@@ -151,6 +164,7 @@
         "leader_phone": null,
         "households": 298,
         "people": 1038,
+        "area_ha": 21.60,
         "status": "active"
     },
     {
@@ -162,6 +176,7 @@
         "leader_phone": null,
         "households": 357,
         "people": 1249,
+        "area_ha": 42.60,
         "status": "active"
     },
     {
@@ -173,6 +188,7 @@
         "leader_phone": null,
         "households": 203,
         "people": 678,
+        "area_ha": 20.40,
         "status": "active"
     },
     {
@@ -184,6 +200,7 @@
         "leader_phone": "0978.530.570",
         "households": 796,
         "people": 2806,
+        "area_ha": 155.50,
         "status": "active"
     },
     {
@@ -195,6 +212,7 @@
         "leader_phone": "0972.280.538",
         "households": 712,
         "people": 2348,
+        "area_ha": 65.00,
         "status": "active"
     },
     {
@@ -206,6 +224,7 @@
         "leader_phone": "0911.940.111",
         "households": 663,
         "people": 2404,
+        "area_ha": 131.40,
         "status": "active"
     },
     {
@@ -217,6 +236,7 @@
         "leader_phone": "0866.697.088",
         "households": 634,
         "people": 2168,
+        "area_ha": 135.80,
         "status": "active"
     },
     {
@@ -228,6 +248,7 @@
         "leader_phone": "0585.288.686",
         "households": 561,
         "people": 2046,
+        "area_ha": 187.80,
         "status": "active"
     },
     {
@@ -239,6 +260,7 @@
         "leader_phone": "0977.597.118",
         "households": 770,
         "people": 2742,
+        "area_ha": 139.60,
         "status": "active"
     },
     {
@@ -250,6 +272,7 @@
         "leader_phone": "0359.290.686",
         "households": 730,
         "people": 2513,
+        "area_ha": 418.60,
         "status": "active"
     },
     {
@@ -261,6 +284,7 @@
         "leader_phone": "0585.288.686",
         "households": 725,
         "people": 2527,
+        "area_ha": 165.10,
         "status": "active"
     },
     {
@@ -272,6 +296,7 @@
         "leader_phone": "0796.191.310",
         "households": 616,
         "people": 2134,
+        "area_ha": 84.50,
         "status": "active"
     },
     {
@@ -283,6 +308,7 @@
         "leader_phone": "0986.361.395",
         "households": 560,
         "people": 1927,
+        "area_ha": 63.00,
         "status": "active"
     }
 ]
