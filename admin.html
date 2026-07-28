@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Quản Trị - Bản đồ Địa bàn Duy Hà</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Material Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F27024',
+            'primary-hover': '#e05f13',
+            'primary-container': '#fef2e6',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="h-full text-slate-800 antialiased font-sans">
+  <div class="flex h-full overflow-hidden">
+    
+    <!-- Sidebar backdrop overlay (mobile only) -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden md:hidden"></div>
+    
+    <!-- Side navigation -->
+    <aside id="admin-sidebar" class="fixed inset-y-0 left-0 w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 z-50 transform -translate-x-full md:translate-x-0 md:static transition-transform duration-300">
+      <!-- Brand -->
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
+            <span class="material-symbols-outlined text-xl">map</span>
+          </div>
+          <div>
+            <h1 class="text-sm font-black text-white leading-none">DUY HÀ ADMIN</h1>
+            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1 block">Bản đồ địa bàn</span>
+          </div>
+        </div>
+        <!-- Close button on mobile -->
+        <button id="btn-close-sidebar" class="p-1 hover:bg-slate-800 rounded-lg text-slate-400 md:hidden flex items-center justify-center">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+      
+      <!-- Nav Menu -->
+      <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+        <button data-tab="overview" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-white bg-primary">
+          <span class="material-symbols-outlined text-lg">dashboard</span>
+          <span>Tổng quan</span>
+        </button>
+        <button data-tab="places" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+          <span class="material-symbols-outlined text-lg">storefront</span>
+          <span>Địa điểm (Places)</span>
+        </button>
+        <button data-tab="families" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+          <span class="material-symbols-outlined text-lg">military_tech</span>
+          <span>Gia đình có công</span>
+        </button>
+        <button data-tab="events" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+          <span class="material-symbols-outlined text-lg">event</span>
+          <span>Sự kiện kỷ niệm</span>
+        </button>
+        <button data-tab="neighborhoods" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800">
+          <span class="material-symbols-outlined text-lg">home_work</span>
+          <span>Tổ dân phố (TDP)</span>
+        </button>
+      </nav>
+      
+      <!-- User profile & Link map -->
+      <div class="p-4 border-t border-slate-800 flex flex-col gap-3">
+        <a href="./index.html" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-750 text-white rounded-xl text-xs font-bold border border-slate-700 transition-all">
+          <span class="material-symbols-outlined text-base">explore</span>
+          <span>Xem Bản đồ Client</span>
+        </a>
+        <div class="flex items-center gap-3 px-2 py-1">
+          <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-xs">
+            AD
+          </div>
+          <div class="min-w-0">
+            <div class="text-xs font-bold text-white truncate">Administrator</div>
+            <div class="text-[10px] text-slate-500 font-semibold truncate">admin@duyha.gov.vn</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+      
+      <!-- Top header -->
+      <header class="h-16 border-b border-slate-200 bg-white flex items-center justify-between px-4 sm:px-8 shrink-0">
+        <div class="flex items-center gap-3">
+          <!-- Toggle sidebar button -->
+          <button id="btn-toggle-sidebar" class="p-2 hover:bg-slate-100 rounded-lg text-slate-600 md:hidden flex items-center justify-center">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <span id="current-tab-title" class="text-sm font-black text-slate-850">Tổng quan hệ thống</span>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <!-- Live Preview Link -->
+          <div class="text-xs text-slate-400 font-medium flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-lg">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Chế độ Mock (LocalStorage)</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Container for tables/cards -->
+      <div id="content-area" class="flex-1 overflow-y-auto p-4 sm:p-8 space-y-4 sm:space-y-8">
+        
+        <!-- Stats Card Row -->
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div class="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Tổng Địa điểm</span>
+              <h3 id="stat-places" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0</h3>
+            </div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-xl sm:text-2xl">storefront</span>
+            </div>
+          </div>
+          
+          <div class="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Gia đình có công</span>
+              <h3 id="stat-families" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0</h3>
+            </div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-xl sm:text-2xl">military_tech</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Sự kiện Kỷ niệm</span>
+              <h3 id="stat-events" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0</h3>
+            </div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-xl sm:text-2xl">event</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Tổ dân phố (TDP)</span>
+              <h3 id="stat-tdp" class="text-xl sm:text-2xl font-black text-slate-800 mt-1">0</h3>
+            </div>
+            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-xl sm:text-2xl">home_work</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamic Panels -->
+
+        <!-- 1. OVERVIEW PANEL -->
+        <div id="panel-overview" class="space-y-6">
+          <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-950 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-lg border border-slate-800">
+            <div class="absolute right-0 bottom-0 opacity-10 translate-x-12 translate-y-12">
+              <span class="material-symbols-outlined text-[200px]">map</span>
+            </div>
+            <div class="max-w-xl relative z-10 space-y-4">
+              <span class="px-2.5 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded-full text-[10px] font-bold uppercase tracking-wider">Hệ thống Demo Vercel</span>
+              <h2 class="text-xl sm:text-2xl font-black tracking-tight leading-tight">Quản trị Cơ sở Dữ liệu Bản đồ Địa bàn Duy Hà</h2>
+              <p class="text-xs text-slate-400 leading-relaxed font-medium">Chào mừng bạn đến với khu vực Quản trị. Dữ liệu tại đây được nạp từ bộ nhớ cục bộ (LocalStorage) của trình duyệt. Mọi thao tác thêm, sửa, xóa sẽ có hiệu lực ngay lập tức khi bạn xem bản đồ Client.</p>
+              <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                <button onclick="document.querySelector('[data-tab=places]').click()" class="px-5 py-2.5 bg-primary hover:bg-primary-hover active:scale-95 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-primary/20 text-center">Quản lý Địa điểm</button>
+                <button onclick="resetToOriginalData()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 rounded-xl text-xs font-bold transition-all border border-slate-700 text-center">Khôi phục dữ liệu gốc</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active celebration simulator -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-sm font-black text-slate-800">Mô phỏng Sự kiện kỷ niệm đang diễn ra</h4>
+                <p class="text-[11px] text-slate-400 font-medium">Bản đồ Client tự động kích hoạt banner tri ân và các gia đình có công thuộc sự kiện đang có ngày trùng khớp.</p>
+              </div>
+              <span class="material-symbols-outlined text-slate-400 shrink-0">celebration</span>
+            </div>
+            
+            <div id="simulated-event-card" class="p-4 rounded-xl border border-slate-100 bg-slate-50 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+              <!-- Event details -->
+              <div class="min-w-0 flex-1 space-y-1">
+                <span class="text-[9px] font-black uppercase text-red-500 bg-red-50 border border-red-100 px-2 py-0.5 rounded" id="sim-event-tag">Đang diễn ra</span>
+                <h5 class="text-xs font-black text-slate-800" id="sim-event-name">Không có sự kiện hôm nay</h5>
+                <p class="text-[11px] text-slate-500 line-clamp-2" id="sim-event-desc">Nhấn nút bên cạnh để xem ngày thử nghiệm hoặc tạo sự kiện mới.</p>
+              </div>
+              
+              <!-- Simulation trigger -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0 w-full md:w-auto">
+                <select id="select-test-date" class="px-3 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-white font-semibold w-full md:w-48">
+                  <!-- Will populate options -->
+                </select>
+                <button id="btn-trigger-test-date" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition-all w-full md:w-auto text-center shrink-0">Kiểm tra</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PLACES PANEL -->
+        <div id="panel-places" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <input type="text" id="search-places" placeholder="Tìm tên hoặc địa chỉ..." class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary w-full sm:w-64 bg-white font-medium">
+              <select id="filter-places-category" class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-white font-semibold">
+                <option value="">Tất cả danh mục</option>
+                <option value="government">Cơ quan đoàn thể</option>
+                <option value="neighborhood">Tổ dân phố / Thôn</option>
+                <option value="school">Trường học</option>
+                <option value="health">Y tế / Bệnh viện</option>
+                <option value="police">An ninh / Công an</option>
+                <option value="meritorious_family">Gia đình có công (Địa điểm)</option>
+              </select>
+            </div>
+            <button onclick="openPlaceModal()" class="px-4 py-2.5 bg-primary hover:bg-primary-hover text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-lg shadow-primary/10">
+              <span class="material-symbols-outlined text-base">add</span>
+              <span>Thêm Địa điểm</span>
+            </button>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th class="py-4 px-6">ID</th>
+                    <th class="py-4 px-6">Hình ảnh</th>
+                    <th class="py-4 px-6">Tên địa điểm</th>
+                    <th class="py-4 px-6">Danh mục</th>
+                    <th class="py-4 px-6">Tọa độ (Lat, Lng)</th>
+                    <th class="py-4 px-6">Đơn vị hành chính</th>
+                    <th class="py-4 px-6 text-right">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="table-places-body" class="divide-y divide-slate-100 text-xs font-medium text-slate-600">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. FAMILIES PANEL -->
+        <div id="panel-families" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <input type="text" id="search-families" placeholder="Tìm tên chủ hộ..." class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary w-full sm:w-64 bg-white font-medium">
+              <select id="filter-families-type" class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-white font-semibold">
+                <option value="">Tất cả diện chính sách</option>
+                <option value="martyr_family">Gia đình Liệt sĩ</option>
+                <option value="wounded_soldier">Thương binh</option>
+                <option value="heroic_mother">Mẹ Việt Nam Anh hùng</option>
+                <option value="armed_forces_hero">Anh hùng LLVTND</option>
+                <option value="other">Chính sách khác</option>
+              </select>
+            </div>
+            <button onclick="openFamilyModal()" class="px-4 py-2.5 bg-primary hover:bg-primary-hover text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-lg shadow-primary/10">
+              <span class="material-symbols-outlined text-base">add</span>
+              <span>Thêm Gia đình có công</span>
+            </button>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th class="py-4 px-6">ID</th>
+                    <th class="py-4 px-6">Tên chủ hộ</th>
+                    <th class="py-4 px-6">Diện chính sách</th>
+                    <th class="py-4 px-6">Người đại diện / SĐT</th>
+                    <th class="py-4 px-6">Thuộc TDP</th>
+                    <th class="py-4 px-6">Quà tặng / Trợ cấp</th>
+                    <th class="py-4 px-6">Sự kiện liên kết</th>
+                    <th class="py-4 px-6 text-right">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="table-families-body" class="divide-y divide-slate-100 text-xs font-medium text-slate-600">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. EVENTS PANEL -->
+        <div id="panel-events" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <input type="text" id="search-events" placeholder="Tìm tên sự kiện..." class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary w-full sm:w-64 bg-white font-medium">
+            <button onclick="openEventModal()" class="px-4 py-2.5 bg-primary hover:bg-primary-hover text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-lg shadow-primary/10">
+              <span class="material-symbols-outlined text-base">add</span>
+              <span>Thêm Sự kiện kỷ niệm</span>
+            </button>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th class="py-4 px-6">ID</th>
+                    <th class="py-4 px-6">Tên sự kiện</th>
+                    <th class="py-4 px-6">Thời gian (Ngày/Tháng)</th>
+                    <th class="py-4 px-6">Mô tả chi tiết</th>
+                    <th class="py-4 px-6">Số gia đình liên kết</th>
+                    <th class="py-4 px-6">Trạng thái</th>
+                    <th class="py-4 px-6 text-right">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="table-events-body" class="divide-y divide-slate-100 text-xs font-medium text-slate-600">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. NEIGHBORHOODS PANEL -->
+        <div id="panel-neighborhoods" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <input type="text" id="search-neighborhoods" placeholder="Tìm tổ dân phố..." class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary w-full sm:w-64 bg-white font-medium">
+              <select id="filter-neighborhoods-type" class="px-4 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-white font-semibold">
+                <option value="">Tất cả hiện trạng</option>
+                <option value="old">Hiện trạng cũ (Trước sáp nhập)</option>
+                <option value="new">Dự kiến mới (Sau sáp nhập)</option>
+              </select>
+            </div>
+            <button onclick="openNeighborhoodModal()" class="px-4 py-2.5 bg-primary hover:bg-primary-hover text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-lg shadow-primary/10">
+              <span class="material-symbols-outlined text-base">add</span>
+              <span>Thêm Tổ dân phố</span>
+            </button>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th class="py-4 px-6">ID</th>
+                    <th class="py-4 px-6">Tên TDP</th>
+                    <th class="py-4 px-6">Phân loại</th>
+                    <th class="py-4 px-6">Mã nhóm sáp nhập</th>
+                    <th class="py-4 px-6">Tổ trưởng / SĐT</th>
+                    <th class="py-4 px-6 text-right">Số hộ</th>
+                    <th class="py-4 px-6 text-right">Số nhân khẩu</th>
+                    <th class="py-4 px-6 text-right">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="table-neighborhoods-body" class="divide-y divide-slate-100 text-xs font-medium text-slate-600">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- 1. Place Modal -->
+  <div id="modal-place" class="fixed inset-0 z-50 items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl w-[94%] sm:w-full max-w-lg p-6 sm:p-8 shadow-2xl border border-slate-100 transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 shrink-0">
+        <h4 id="modal-place-title" class="text-sm font-black text-slate-800">Thêm Địa điểm mới</h4>
+        <button onclick="closePlaceModal()" class="text-slate-400 hover:text-slate-600 flex items-center justify-center">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      
+      <form id="form-place" class="flex-1 overflow-y-auto py-6 space-y-4 pr-1 text-xs">
+        <input type="hidden" id="place-id">
+        
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tên địa điểm *</label>
+          <input type="text" id="place-name" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Danh mục *</label>
+            <select id="place-category" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <option value="government">Cơ quan đoàn thể</option>
+              <option value="neighborhood">Tổ dân phố / Thôn</option>
+              <option value="school">Trường học</option>
+              <option value="health">Y tế / Bệnh viện</option>
+              <option value="police">An ninh / Công an</option>
+              <option value="meritorious_family">Gia đình có công (Địa điểm)</option>
+              <option value="other">Khác</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Xã/Phường quản lý *</label>
+            <select id="place-ward-id" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <!-- Will populate -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Vĩ độ (Lat) *</label>
+            <input type="number" step="any" id="place-lat" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Kinh độ (Lng) *</label>
+            <input type="number" step="any" id="place-lng" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Địa chỉ hiển thị</label>
+          <input type="text" id="place-address" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Hình ảnh URL</label>
+          <input type="url" id="place-image" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Mô tả chi tiết</label>
+          <textarea id="place-description" rows="3" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800"></textarea>
+        </div>
+      </form>
+      
+      <div class="pt-4 border-t border-slate-100 flex justify-end gap-3 shrink-0">
+        <button type="button" onclick="closePlaceModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold transition-all">Hủy</button>
+        <button type="submit" form="form-place" class="px-5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold transition-all">Lưu địa điểm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Family Modal -->
+  <div id="modal-family" class="fixed inset-0 z-50 items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl w-[94%] sm:w-full max-w-lg p-6 sm:p-8 shadow-2xl border border-slate-100 transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 shrink-0">
+        <h4 id="modal-family-title" class="text-sm font-black text-slate-800">Thêm Gia đình chính sách</h4>
+        <button onclick="closeFamilyModal()" class="text-slate-400 hover:text-slate-600 flex items-center justify-center">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      
+      <form id="form-family" class="flex-1 overflow-y-auto py-6 space-y-4 pr-1 text-xs">
+        <input type="hidden" id="family-id">
+        
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tên chủ hộ *</label>
+          <input type="text" id="family-name" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Diện chính sách *</label>
+            <select id="family-type" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <option value="martyr_family">Gia đình Liệt sĩ</option>
+              <option value="wounded_soldier">Thương binh</option>
+              <option value="heroic_mother">Mẹ Việt Nam Anh hùng</option>
+              <option value="armed_forces_hero">Anh hùng LLVTND</option>
+              <option value="other">Diện chính sách khác</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tổ dân phố (TDP) *</label>
+            <select id="family-neighborhood-id" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <!-- Will populate -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Người đại diện nhận quà</label>
+            <input type="text" id="family-rep-name" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Số điện thoại</label>
+            <input type="text" id="family-phone" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Địa chỉ gia đình</label>
+          <input type="text" id="family-address" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Sự kiện liên kết *</label>
+            <select id="family-event-id" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <!-- Will populate -->
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Trạng thái duyệt *</label>
+            <select id="family-status" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <option value="active">Hiển thị (Đang hoạt động)</option>
+              <option value="inactive">Ẩn (Không hoạt động)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Chi tiết quà tặng & Trợ cấp</label>
+          <input type="text" id="family-benefit" placeholder="E.g. Bằng khen & Quà tặng trị giá 1.500.000đ" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+      </form>
+      
+      <div class="pt-4 border-t border-slate-100 flex justify-end gap-3 shrink-0">
+        <button type="button" onclick="closeFamilyModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold transition-all">Hủy</button>
+        <button type="submit" form="form-family" class="px-5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold transition-all">Lưu gia đình</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Event Modal -->
+  <div id="modal-event" class="fixed inset-0 z-50 items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl w-[94%] sm:w-full max-w-lg p-6 sm:p-8 shadow-2xl border border-slate-100 transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 shrink-0">
+        <h4 id="modal-event-title" class="text-sm font-black text-slate-800">Thêm Sự kiện kỷ niệm</h4>
+        <button onclick="closeEventModal()" class="text-slate-400 hover:text-slate-600 flex items-center justify-center">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      
+      <form id="form-event" class="flex-1 overflow-y-auto py-6 space-y-4 pr-1 text-xs">
+        <input type="hidden" id="event-id">
+        
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tên sự kiện *</label>
+          <input type="text" id="event-name" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Ngày diễn ra (Day) *</label>
+            <input type="number" min="1" max="31" id="event-day" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tháng diễn ra (Month) *</label>
+            <input type="number" min="1" max="12" id="event-month" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Mô tả sự kiện / Tuyên truyền</label>
+          <textarea id="event-description" rows="4" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Trạng thái kích hoạt *</label>
+          <select id="event-status" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+            <option value="active">Đang hoạt động</option>
+            <option value="inactive">Tạm dừng</option>
+          </select>
+        </div>
+      </form>
+      
+      <div class="pt-4 border-t border-slate-100 flex justify-end gap-3 shrink-0">
+        <button type="button" onclick="closeEventModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold transition-all">Hủy</button>
+        <button type="submit" form="form-event" class="px-5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold transition-all">Lưu sự kiện</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Neighborhood Modal -->
+  <div id="modal-neighborhood" class="fixed inset-0 z-50 items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl w-[94%] sm:w-full max-w-lg p-6 sm:p-8 shadow-2xl border border-slate-100 transform scale-95 opacity-0 transition-all duration-300 flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 shrink-0">
+        <h4 id="modal-neighborhood-title" class="text-sm font-black text-slate-800">Thêm Tổ dân phố mới</h4>
+        <button onclick="closeNeighborhoodModal()" class="text-slate-400 hover:text-slate-600 flex items-center justify-center">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      
+      <form id="form-neighborhood" class="flex-1 overflow-y-auto py-6 space-y-4 pr-1 text-xs">
+        <input type="hidden" id="neighborhood-id">
+        
+        <div>
+          <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tên Tổ dân phố *</label>
+          <input type="text" id="neighborhood-name" placeholder="E.g. Đông Hải" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Hiện trạng sáp nhập *</label>
+            <select id="neighborhood-type" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+              <option value="old">Cũ (Trước sáp nhập)</option>
+              <option value="new">Mới (Dự kiến sáp nhập)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Mã nhóm sáp nhập</label>
+            <input type="text" id="neighborhood-group-code" placeholder="E.g. hoang-dong" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Tên Tổ trưởng</label>
+            <input type="text" id="neighborhood-leader-name" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Số điện thoại</label>
+            <input type="text" id="neighborhood-leader-phone" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Số hộ dân *</label>
+            <input type="number" id="neighborhood-households" required min="0" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+          <div>
+            <label class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5">Số nhân khẩu *</label>
+            <input type="number" id="neighborhood-people" required min="0" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-primary bg-slate-50 font-semibold text-slate-800">
+          </div>
+        </div>
+      </form>
+      
+      <div class="pt-4 border-t border-slate-100 flex justify-end gap-3 shrink-0">
+        <button type="button" onclick="closeNeighborhoodModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl font-bold transition-all">Hủy</button>
+        <button type="submit" form="form-neighborhood" class="px-5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-bold transition-all">Lưu TDP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin JS entrypoint -->
+  <script type="module" src="./src/admin.ts"></script>
+</body>
+</html>

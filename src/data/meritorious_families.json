@@ -1,0 +1,14 @@
+[
+    {
+        "id": 7,
+        "name": "Gia đình Liệt sĩ chống Mỹ Nguyễn Hữu Tài",
+        "type": "Gia đình Liệt sĩ",
+        "neighborhood_id": null,
+        "address": "TDP Duy Minh, phường Duy Hà",
+        "representative_name": "Nguyễn Hữu Đức (Em trai liệt sĩ)",
+        "phone": "0975123403",
+        "benefit_details": "Hỗ trợ thờ cúng liệt sĩ 1.000.000đ và giỏ quà tri ân ngày 22\/12.",
+        "celebration_event_id": 2,
+        "status": "active"
+    }
+]

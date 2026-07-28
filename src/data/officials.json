@@ -1,0 +1,237 @@
+[
+    {
+        "id": 1,
+        "name": "Ngô Thị Lan Hương",
+        "role": "Bí thư Đảng ủy, chủ tịch HĐND",
+        "phone": "0983542466",
+        "neighborhood_name": [
+            "Đảng ủy Phường Duy Hà"
+        ],
+        "avatar_color": "#DC2626",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+        "department": "dang_uy",
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "name": "Trần Hạng Vũ",
+        "role": "Phó Bí thư thường trực",
+        "phone": "0986583169",
+        "neighborhood_name": [
+            "Đảng ủy Phường Duy Hà"
+        ],
+        "avatar_color": "#1D4ED8",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
+        "department": "dang_uy",
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "name": "Đàm Thanh Minh",
+        "role": "Chánh văn phòng Đảng ủy",
+        "phone": "0916185222",
+        "neighborhood_name": [
+            "Đảng ủy Phường Duy Hà"
+        ],
+        "avatar_color": "#2563EB",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop",
+        "department": "dang_uy",
+        "status": "active"
+    },
+    {
+        "id": 4,
+        "name": "Nguyễn Như Uy",
+        "role": "Phó Bí thư Đảng ủy, Chủ tịch UBND",
+        "phone": "0912220182",
+        "neighborhood_name": [
+            "UBND Phường Duy Hà"
+        ],
+        "avatar_color": "#059669",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop",
+        "department": "chinh_quyen",
+        "status": "active"
+    },
+    {
+        "id": 5,
+        "name": "Nguyễn Duy Khiêm",
+        "role": "Chánh VP HĐND-UBND",
+        "phone": "0942893028",
+        "neighborhood_name": [
+            "UBND Phường Duy Hà"
+        ],
+        "avatar_color": "#0284C7",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+        "department": "chinh_quyen",
+        "status": "active"
+    },
+    {
+        "id": 6,
+        "name": "Kiều Ngọc Kiên",
+        "role": "Trưởng phòng Văn hoá - Xã hội",
+        "phone": "0973268310",
+        "neighborhood_name": [
+            "UBND Phường Duy Hà"
+        ],
+        "avatar_color": "#7C3AED",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+        "department": "chinh_quyen",
+        "status": "active"
+    },
+    {
+        "id": 7,
+        "name": "Nguyễn Đức Thuận",
+        "role": "Trưởng phòng Kinh tế hạ tầng",
+        "phone": "0912164372",
+        "neighborhood_name": [
+            "UBND Phường Duy Hà"
+        ],
+        "avatar_color": "#D97706",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
+        "department": "chinh_quyen",
+        "status": "active"
+    },
+    {
+        "id": 8,
+        "name": "Nguyễn Tiến Đạt",
+        "role": "Giám đốc TTPVHCC",
+        "phone": "0915802179",
+        "neighborhood_name": [
+            "Trung tâm Phục vụ Hành chính công"
+        ],
+        "avatar_color": "#10B981",
+        "avatar": "https:\/\/images.unsplash.com\/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop",
+        "department": "ttpvhcc",
+        "status": "active"
+    },
+    {
+        "id": 9,
+        "name": "Thiếu tá Đỗ Đình Thái",
+        "role": "Phó Trưởng Công an Phường",
+        "phone": "0945.222.269",
+        "neighborhood_name": [
+            "Công an Phường Duy Hà"
+        ],
+        "avatar_color": "#DC2626",
+        "avatar": null,
+        "department": "cong_an",
+        "status": "active"
+    },
+    {
+        "id": 10,
+        "name": "Đại úy Trần Hữu Tiến",
+        "role": "Cán bộ CSKV Phụ trách TDP Duy Minh",
+        "phone": "0986.361.395",
+        "neighborhood_name": [
+            "TDP Duy Minh"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 11,
+        "name": "Đại úy Đoàn Văn Chương",
+        "role": "Cán bộ CSKV Phụ trách TDP Bạch Xá",
+        "phone": "0911.940.111",
+        "neighborhood_name": [
+            "TDP Bạch Xá"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 12,
+        "name": "Thiếu úy Vũ Văn Hào",
+        "role": "Cán bộ CSKV Phụ trách TDP Động Linh Trang",
+        "phone": "0796.191.310",
+        "neighborhood_name": [
+            "TDP Động Linh Trang"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 13,
+        "name": "Thiếu tá Nguyễn Minh Tiến",
+        "role": "Cán bộ CSKV Phụ trách TDP Ngọc Tú",
+        "phone": "0359.290.686",
+        "neighborhood_name": [
+            "TDP Ngọc Tú"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 14,
+        "name": "Đại úy Nguyễn Văn Việt",
+        "role": "Cán bộ CSKV Phụ trách TDP Chuồng",
+        "phone": "0972.280.538",
+        "neighborhood_name": [
+            "TDP Chuồng"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 15,
+        "name": "Thượng úy Đinh Xuân Trưởng",
+        "role": "Cán bộ CSKV Phụ trách TDP Hương Cát, TDP Duy Hải",
+        "phone": "0585.288.686",
+        "neighborhood_name": [
+            "TDP Hương Cát",
+            "TDP Duy Hải"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 16,
+        "name": "Thiếu tá Ngô Vinh Quang",
+        "role": "Cán bộ CSKV Phụ trách TDP Hoàng Đồng",
+        "phone": "0977.597.118",
+        "neighborhood_name": [
+            "TDP Hoàng Đồng"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 17,
+        "name": "Thiếu tá Nguyễn Văn Tuân",
+        "role": "Cán bộ CSKV Phụ trách TDP Đông Hải",
+        "phone": "0866.697.088",
+        "neighborhood_name": [
+            "TDP Đông Hải"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    },
+    {
+        "id": 18,
+        "name": "Đại úy Vũ Ngọc Quang",
+        "role": "Cán bộ CSKV Phụ trách TDP Ngọc Động",
+        "phone": "0978.530.570",
+        "neighborhood_name": [
+            "TDP Ngọc Động"
+        ],
+        "avatar_color": "#B91C1C",
+        "avatar": null,
+        "department": "cskv",
+        "status": "active"
+    }
+]

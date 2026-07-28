@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Kỷ niệm Ngày Giải phóng miền Nam, Thống nhất đất nước (30\/04) & Quốc tế Lao động (01\/05)",
+        "month": 4,
+        "day": 30,
+        "description": "Tuyên dương tinh thần đoàn kết toàn dân và tri ân thế hệ cha anh đã có công lao to lớn đưa đất nước đi đến ngày thống nhất, hòa bình, đồng thời tôn vinh giai cấp công nhân lao động.",
+        "is_featured": false,
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "name": "Kỷ niệm ngày Thương binh - Liệt sĩ (27\/07)",
+        "month": 7,
+        "day": 27,
+        "description": "Hoạt động tri ân sâu sắc, đời đời nhớ ơn các anh hùng liệt sĩ, các thương binh, bệnh binh và những gia đình chính sách đã hy sinh xương máu cho nền độc lập tự do của Tổ quốc.",
+        "is_featured": true,
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "name": "Kỷ niệm Ngày Quốc khánh nước Cộng hòa Xã hội Chủ nghĩa Việt Nam (02\/09)",
+        "month": 9,
+        "day": 2,
+        "description": "Tri ân các gia đình có công với cách mạng, lão thành cách mạng và nhân dân đã có nhiều cống hiến cho sự nghiệp khai sinh ra nước Việt Nam Dân chủ Cộng hòa.",
+        "is_featured": false,
+        "status": "active"
+    },
+    {
+        "id": 4,
+        "name": "Kỷ niệm Ngày thành lập Quân đội Nhân dân Việt Nam (22\/12)",
+        "month": 12,
+        "day": 22,
+        "description": "Tôn vinh các gia đình cựu chiến binh, quân nhân xuất ngũ có hoàn cảnh khó khăn và những cá nhân đã có nhiều cống hiến vẻ vang trong lực lượng vũ trang nhân dân Việt Nam.",
+        "is_featured": false,
+        "status": "active"
+    }
+]

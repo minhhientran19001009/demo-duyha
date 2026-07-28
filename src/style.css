@@ -1,0 +1,662 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  /* Keep essential color vars for custom-dropdown if needed, though most are in Tailwind config now */
+  --bg: #f5f7f9;
+  --panel-bg: hsla(0, 0%, 100%, 0.85);
+  --panel-border: rgba(0, 0, 0, 0.05);
+  --text-main: #2c2f31;
+  --text-muted: #595c5e;
+
+  --primary: #cc0000;
+  --primary-glow: rgba(204, 0, 0, 0.1);
+
+  --rad-md: 0.5rem;
+  --rad-full: 9999px;
+  --sp-2: 0.5rem;
+  --sp-4: 1rem;
+  --trans: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset - Let Tailwind handle most, just fix tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* Hide horizontal scrollbars for clean table presentation */
+.overflow-x-auto {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.overflow-x-auto::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Location marker pulse animation */
+@keyframes location-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Glass effect used generically */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Leaflet Container */
+#map {
+  z-index: 1;
+  /* Under the UI */
+  font-family: inherit;
+  will-change: transform;
+  /* hint GPU layer for map container */
+}
+
+/* GPU-accelerate all Leaflet tile layers & overlay panes */
+.leaflet-tile-container,
+.leaflet-zoom-animated {
+  will-change: transform;
+  transform: translateZ(0);
+  /* force GPU compositing layer */
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smoother tile fade-in */
+.leaflet-tile {
+  transition: opacity 0.15s linear;
+}
+
+/* Marker Cluster Custom styling (simulating tailwind) */
+.marker-cluster-custom {
+  background-color: #10b981;
+  /* emerald-500 */
+  color: white;
+  border-radius: 9999px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  transition: transform 0.2s;
+}
+
+.marker-cluster-custom:hover {
+  transform: scale(1.1);
+}
+
+/* Custom Dropdown component (Too complex for pure tailwind classes on the fly) */
+.custom-dropdown {
+  user-select: none;
+}
+
+.dropdown-icon {
+  transition: var(--trans);
+}
+
+.custom-dropdown.open .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.dropdown-list {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: auto;
+  width: 280px;
+  max-height: 320px;
+  overflow-y: auto;
+  border-radius: 1rem;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: var(--trans);
+  z-index: 1010;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-dropdown.open .dropdown-list {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-item:hover,
+.dropdown-item.selected {
+  background: #fef2f2;
+  color: #cc0000;
+}
+
+/* Custom Scrollbar for Dropdown */
+.dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: var(--panel-border);
+  border-radius: var(--rad-full);
+}
+
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.search-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: var(--trans);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-item:hover {
+  background: rgba(0, 98, 137, 0.05);
+  /* primary-glow */
+}
+
+.search-item .item-title {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 0.875rem;
+}
+
+.search-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.search-item .item-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Layer Switcher */
+.layer-btn {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.layer-btn:hover {
+  transform: scale(1.05);
+}
+
+.layer-btn.active {
+  border-color: #006289;
+  box-shadow: 0 0 0 3px rgba(0, 98, 137, 0.3);
+}
+
+#layer-menu.open {
+  display: flex !important;
+}
+
+#layer-menu {
+  filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.2));
+  transition: var(--trans);
+  position: relative;
+}
+
+.layer-thumb {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.layer-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 98, 137, 0.85);
+  /* Use primary color with opacity */
+  color: white;
+  font-size: 7.5px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2px 0;
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+}
+
+#layer-menu {
+  filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.2));
+}
+
+/* Leaflet Overrides */
+.leaflet-bar {
+  border: none !important;
+  display: none;
+  /* We use custom zoom controls now */
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 4px;
+  margin-right: 12px !important;
+}
+
+/* Fix Swiper Slide Width */
+.swiper-slide {
+  width: auto !important;
+  /* Important for slidesPerView: auto */
+}
+
+/* Custom Map Popup Glassmorphism */
+.popup-glass .leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 98, 137, 0.15);
+  padding: 4px;
+}
+
+.popup-glass .leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px rgba(0, 98, 137, 0.15);
+}
+
+
+/* SOS Pulsing Circle Animation */
+@keyframes pulse-sos-anim {
+  0% {
+    stroke-opacity: 0.9;
+    fill-opacity: 0.35;
+    stroke-width: 2;
+  }
+  50% {
+    stroke-opacity: 0.35;
+    fill-opacity: 0.1;
+    stroke-width: 5;
+  }
+  100% {
+    stroke-opacity: 0.9;
+    fill-opacity: 0.35;
+    stroke-width: 2;
+  }
+}
+
+.pulse-sos {
+  animation: pulse-sos-anim 1.8s infinite ease-in-out;
+}
+
+
+/* Custom Scrollbar Utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Elegant scrollbar for table containers inside TDP modal */
+#tdp-modal-body .overflow-x-auto::-webkit-scrollbar {
+  height: 5px;
+}
+#tdp-modal-body .overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+#tdp-modal-body .overflow-x-auto::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.35);
+  border-radius: 9999px;
+}
+#tdp-modal-body .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.55);
+}
+
+/* Meritorious family marker pulsing glow */
+@keyframes meritorious-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.9), 0 0 0 0 rgba(245, 158, 11, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0), 0 0 0 16px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0), 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+.meritorious-pulse-marker {
+  animation: meritorious-pulse 2s infinite !important;
+}
+
+/* Celebration banner pulsing and animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.93;
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Adjustments for celebration mode active on body */
+body.celebration-active header {
+  top: 48px !important;
+  margin-top: 0 !important;
+  transition: all 0.3s ease;
+}
+body.celebration-active #stats-panel {
+  top: 128px !important;
+  transition: all 0.3s ease;
+}
+body.celebration-active aside.fixed.right-6.top-24 {
+  top: 128px !important;
+  transition: all 0.3s ease;
+}
+
+header, #stats-panel, aside.fixed.right-6.top-24 {
+  transition: all 0.3s ease;
+}
+
+/* Custom class for red badge */
+.bg-red-650 {
+  background-color: #d32f2f;
+}
+.hover\:bg-red-550:hover {
+  background-color: #e53935;
+}
+
+/* Celebration Marquee & Masking Effects */
+@keyframes marquee {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+
+.mask-gradient {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* ======================================================
+   CỔNG TRA CỨU ĐỊA BÀN PHƯỜNG DUY HÀ - DESIGN SYSTEM
+   ====================================================== */
+html, body {
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 15px;
+}
+
+:root {
+  --portal-primary: #B91C1C;
+  --portal-secondary: #991B1B;
+  --portal-gold: #D97706;
+  --portal-bg: #FAF4E6;
+  --portal-card: #FFFFFF;
+  --portal-border: #E8DFCB;
+  --portal-text: #0F172A;
+  --portal-muted: #64748B;
+  --portal-shadow: 0 4px 20px -2px rgba(185, 28, 28, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="dark"], body.dark-mode {
+  --portal-bg: #020617;
+  --portal-card: #0F172A;
+  --portal-border: #1E293B;
+  --portal-text: #F8FAFC;
+  --portal-muted: #94A3B8;
+  --portal-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+}
+
+.custom-leaflet-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Portal Global Layout */
+body.portal-active {
+  background: var(--portal-bg);
+  color: var(--portal-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hero Section Background Image - Hiển thị ảnh chân thực rực rỡ */
+.hero-gradient {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0.65) 100%), url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.hero-text-shadow {
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Portal Search Bar */
+.portal-search-wrap {
+  background: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  box-shadow: var(--portal-shadow);
+  border-radius: 1rem;
+  transition: all 0.2s ease;
+}
+
+.portal-search-wrap:focus-within {
+  border-color: var(--portal-primary);
+  box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.15);
+}
+
+/* Stats Cards */
+.stat-card {
+  background: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  box-shadow: var(--portal-shadow);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--portal-secondary);
+}
+
+/* Place Grid Cards */
+.place-card {
+  background: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  box-shadow: var(--portal-shadow);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.place-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(29, 78, 216, 0.16);
+  border-color: var(--portal-secondary);
+}
+
+.place-card-cover {
+  height: 140px;
+  background: linear-gradient(135deg, #1E40AF, #0B1A4E);
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Officer Card */
+.officer-card {
+  background: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  box-shadow: var(--portal-shadow);
+  border-radius: 1.125rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.officer-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--portal-primary);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.12);
+}
+
+/* Badge Tags */
+.chip-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(29, 78, 216, 0.1);
+  color: var(--portal-primary);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* VR Panorama Container in Portal Detail */
+#portal-pannellum-container {
+  width: 100%;
+  height: 380px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: var(--portal-shadow);
+}
+
+
+/* Smooth collapse/expand transition for Carousel Container */
+#carousel-container {
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              margin-top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              padding-top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              padding-bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+  overflow: hidden;
+  will-change: max-height, opacity, transform;
+}
+
+#carousel-container.collapsed {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
+  pointer-events: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Mobile Media Queries & Responsive Polish */
+@media (max-width: 768px) {
+  #portal-pannellum-container {
+    height: 250px !important;
+    border-radius: 0.875rem !important;
+  }
+
+  .place-card-cover {
+    height: 120px !important;
+  }
+
+  /* Ensure map stats panel overlays floating on mobile when toggled */
+  #stats-panel {
+    top: 72px !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-height: calc(100vh - 160px) !important;
+    overflow-y: auto !important;
+  }
+}
