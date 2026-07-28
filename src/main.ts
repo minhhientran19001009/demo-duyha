@@ -387,7 +387,15 @@ class PortalApp {
       if (neighborhoodsRes.ok) {
         const nData = await neighborhoodsRes.json();
         if (Array.isArray(nData) && nData.length > 0) {
-          this.neighborhoods = nData;
+          this.neighborhoods = nData.map((item: any) => {
+            const seed = NEIGHBORHOODS.find(s => (s.id === item.id || s.name === item.name || s.group_code === item.group_code) && s.type === item.type);
+            return {
+              ...item,
+              area_ha: item.area_ha ?? seed?.area_ha ?? 0,
+              leader_name: item.leader_name || seed?.leader_name || null,
+              leader_phone: item.leader_phone || seed?.leader_phone || null
+            };
+          });
           this.renderTdpModalTables();
         }
       }
